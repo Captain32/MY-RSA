@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
   rsa_make_pub(p, q, n, e, bits, iter);
   rsa_make_priv(d, e, p, q);
 
-  char *username = getenv("USER");
+  char *username = getenv("USER"); //获得用户名，随后构造签名
   mpz_set_str(s, username, 62);
   rsa_sign(s, s, d, n);
 

@@ -1,6 +1,7 @@
 #include "numtheory.h"
 #include "randstate.h"
 
+// d为a和b的最大公约数
 void gcd(mpz_t d, mpz_t a, mpz_t b) {
   mpz_t tmpa, tmpb, tmpt;
   mpz_inits(tmpa, tmpb, tmpt, NULL);
@@ -15,6 +16,7 @@ void gcd(mpz_t d, mpz_t a, mpz_t b) {
   mpz_clears(tmpa, tmpb, tmpt, NULL);
 }
 
+// i为模n的域中a的逆，即 i*a = 1 mod n
 void mod_inverse(mpz_t i, mpz_t a, mpz_t n) {
   mpz_t r, r1, t, t1, q, tmp;
   mpz_inits(r, r1, t, t1, q, tmp, NULL);
@@ -46,6 +48,7 @@ void mod_inverse(mpz_t i, mpz_t a, mpz_t n) {
   mpz_clears(r, r1, t, t1, q, tmp, NULL);
 }
 
+// out=base^exponent mod modulus
 void pow_mod(mpz_t out, mpz_t base, mpz_t exponent, mpz_t modulus) {
   mpz_t v, p, d;
   mpz_inits(v, p, d, NULL);
@@ -65,6 +68,8 @@ void pow_mod(mpz_t out, mpz_t base, mpz_t exponent, mpz_t modulus) {
   mpz_clears(v, p, d, NULL);
 }
 
+//判断n是否为素数，使用Miller
+// Rabin素数测试法，iters为测试次数，次数越多，准确率越高
 bool is_prime(mpz_t n, uint64_t iters) {
   unsigned long long s = 0, j;
   mpz_t r, a, y, range, n_1, num_2;
@@ -108,6 +113,7 @@ bool is_prime(mpz_t n, uint64_t iters) {
   return true;
 }
 
+//生成最长有bits个bit的素数p
 void make_prime(mpz_t p, uint64_t bits, uint64_t iters) {
   while (true) {
     mpz_urandomb(p, state, bits);

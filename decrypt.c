@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
       ifile = fopen(optarg, "r");
       break;
     case 'o':
-      ofile = fopen(optarg, "wb");
+      ofile = fopen(optarg, "wb"); //可以处理二进制文件
       break;
     case 'n':
       strcpy(pvfile, optarg);

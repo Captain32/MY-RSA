@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
   while ((opt = getopt(argc, argv, string)) != -1) {
     switch (opt) {
     case 'i':
-      ifile = fopen(optarg, "rb");
+      ifile = fopen(optarg, "rb"); //可以处理二进制文件
       break;
     case 'o':
       ofile = fopen(optarg, "w");
@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
     gmp_printf("the public exponent e: %Zd\n", e);
   }
 
-  mpz_set_str(m, username, 62);
+  mpz_set_str(m, username, 62); //需要验证用户使用权限
   if (!rsa_verify(m, s, e, n)) {
     printf("ERROR! rsa_verify failed!\n");
     return 0;
